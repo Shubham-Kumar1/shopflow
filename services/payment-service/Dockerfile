@@ -9,6 +9,7 @@ RUN addgroup -S app && adduser -S app -G app
 COPY --from=deps /app/node_modules ./node_modules
 COPY src ./src
 COPY package.json ./
+RUN chown -R app:app /app
 USER app
 EXPOSE 4004
 HEALTHCHECK --interval=30s --timeout=3s CMD wget -qO- http://localhost:4004/health || exit 1
